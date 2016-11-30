@@ -1,0 +1,24 @@
+﻿<Page
+    x:Class="CheckACDConverter.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CheckACDConverter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Width="1275.963">
+
+    <Grid x:Name="grdMain" RenderTransformOrigin="0.519,0.6" Margin="0,0,10,0">
+        <TextBox x:Name="txtStatus" HorizontalAlignment="Left" Margin="963,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="206" Height="53"/>
+        <Button x:Name="btnLum" Content="Leggi Luminosita" HorizontalAlignment="Left" Margin="357,142,0,0" VerticalAlignment="Top" Width="162" Height="51" Click="btnLum_Click"/>
+        <Button x:Name="btnCO2" Content="Leggi CO2" HorizontalAlignment="Left" Margin="357,198,0,0" VerticalAlignment="Top" Width="162" Height="51" Click="btnCO2_Click"/>
+        <Button x:Name="btnAir" Content="Leggi Umidita Aria" HorizontalAlignment="Left" Margin="357,254,0,0" VerticalAlignment="Top" Width="162" Height="51" Click="btnAir_Click"/>
+        <Button x:Name="btnTerr" Content="Leggi Umidita Terreno" HorizontalAlignment="Left" Margin="357,310,0,0" VerticalAlignment="Top" Width="162" Height="51" Click="btnTerr_Click"/>
+        <Button x:Name="btnTemp" Content="Leggi Temperatura" HorizontalAlignment="Left" Margin="357,366,0,0" VerticalAlignment="Top" Width="162" Height="51" Click="btnTemp_Click"/>
+        <TextBox x:Name="txtLum" HorizontalAlignment="Left" Margin="627,142,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207" Height="51"/>
+        <TextBox x:Name="txtCO2" HorizontalAlignment="Left" Margin="627,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207" Height="51"/>
+        <TextBox x:Name="txtAir" HorizontalAlignment="Left" Margin="627,254,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207" Height="51"/>
+        <TextBox x:Name="txtTerr" HorizontalAlignment="Left" Margin="627,310,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207" Height="51"/>
+        <TextBox x:Name="txtTemp" HorizontalAlignment="Left" Margin="627,366,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207" Height="51"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="53" Margin="237,36,0,0" TextWrapping="Wrap" Text="Aloisi Faedi" VerticalAlignment="Top" Width="316"/>
+    </Grid>
+</Page>
