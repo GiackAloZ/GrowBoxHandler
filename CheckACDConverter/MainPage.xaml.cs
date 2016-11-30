@@ -60,18 +60,18 @@ namespace CheckACDConverter
         private const int STATUS_NUMBER = 5;
         private int _currentStatus = 0;
         private string[] STATUS_PRE_TEXT_MESSAGES = {
-            "Luminosità = ",
-            "CO2 = ",
-            "Umidità aria = ",
-            "Umidità terreno = ",
-            "Temperatura = "
+            "Luminosita'",
+            "CO2",
+            "Umidita' aria",
+            "Umidita' terreno",
+            "Temperatura"
         };
         private string[] STATUS_POST_TEXT_MESSAGES = {
             " lux",
             " PPM",
             " %",
             " %",
-            " °C"
+            " C"
         };
 
         public MainPage()
@@ -101,9 +101,13 @@ namespace CheckACDConverter
 
         private void PrintStatus_Tick(object sender, object e)
         {
+            _lcd.Clear();
             if (_currentStatus >= STATUS_NUMBER)
                 _currentStatus = 0;
-            _lcd.Print(STATUS_PRE_TEXT_MESSAGES[_currentStatus] + _sensori[_currentStatus].ReadValue() + STATUS_POST_TEXT_MESSAGES[_currentStatus]);
+            _lcd.SetCursor(0, 0);
+            _lcd.Print(STATUS_PRE_TEXT_MESSAGES[_currentStatus]);
+            _lcd.SetCursor(1, 0);
+            _lcd.Print(_sensori[_currentStatus].ReadValue().ToString("F2") + STATUS_POST_TEXT_MESSAGES[_currentStatus]);
             _currentStatus++;
         }
 
