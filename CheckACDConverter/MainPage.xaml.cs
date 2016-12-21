@@ -23,6 +23,11 @@ namespace CheckACDConverter
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private FileLogger _physicalFL;
+        private FileLogger _masterFL;
+        private const string PHYSICAL_LOG_FILE_NAME = "physicalLog.txt";
+        private const string MASTER_LOG_FILE_NAME = "masterLog.txt";
+
         private const int SERIAL_NUMBER = 0;
         private const int LUM_SHIFT_NUMBER = 0;
         private const int CO2_SHIFT_NUMBER = 3;
@@ -31,6 +36,17 @@ namespace CheckACDConverter
         private const int TEMP_SHIFT_NUMBER = 1;
 
         private MCP3208ADC _converter;
+
+        private StepperMotorDevice _lightFence;
+        private const int A1_STEPPER_PIN = 3;
+        private const int A2_STEPPER_PIN = 4;
+        private const int B1_STEPPER_PIN = 5;
+        private const int B2_STEPPER_PIN = 6;
+        private const int STOP_ORARIO_PIN = 21;
+        private const int STOP_ANTIORARIO_PIN = 20;
+        private OnOffDevice _lightBulb;
+        private const int LIGHT_BULB_PIN = 7;
+        private LightController _lightController;
 
         private SensoreAnalogico[] _sensori;
         private const int LUM_ARRAY_NUMBER = 0;
@@ -78,7 +94,13 @@ namespace CheckACDConverter
         {
             this.InitializeComponent();
 
+            _physicalFL = new FileLogger(PHYSICAL_LOG_FILE_NAME);
+            _masterFL = new FileLogger(MASTER_LOG_FILE_NAME);
+
             _converter = new MCP3208ADC(SERIAL_NUMBER);
+
+            _shiftR = new ShiftRegister(SHIFT_REGISTER_BUS_LENGHT, DATA_SHIFT_REGISTER_PIN, CLOCK_SHIFT_REGISTER_PIN, LATCH_SHIFT_REGISTER_PIN);
+            _lcd = new LCD(_shiftR, LCD_BIT0_PIN, LCD_BIT1_PIN, LCD_BIT2_PIN, LCD_BIT3_PIN, LCD_ENABLE_PIN, LCD_REGISTER_SELECT_PIN);
 
             _sensori = new SensoreAnalogico[]
             {
@@ -89,14 +111,40 @@ namespace CheckACDConverter
                 new SensoreTemperatura(_converter, TEMP_SHIFT_NUMBER)
             };
 
-            _shiftR = new ShiftRegister(SHIFT_REGISTER_BUS_LENGHT, DATA_SHIFT_REGISTER_PIN, CLOCK_SHIFT_REGISTER_PIN, LATCH_SHIFT_REGISTER_PIN);
-            _lcd = new LCD(_shiftR, LCD_BIT0_PIN, LCD_BIT1_PIN, LCD_BIT2_PIN, LCD_BIT3_PIN, LCD_ENABLE_PIN, LCD_REGISTER_SELECT_PIN);
-
             _printStatus.Interval = TimeSpan.FromMilliseconds(CHANGE_STATUS_MILLISECONDS_TIMER);
             _printStatus.Tick += PrintStatus_Tick;
             _printStatus.Start();
 
+            _lightFence = new StepperMotorDevice("Blinding Fence", _shiftR, A1_STEPPER_PIN, A2_STEPPER_PIN, B1_STEPPER_PIN, B2_STEPPER_PIN, STOP_ORARIO_PIN, STOP_ANTIORARIO_PIN);
+            _lightFence.WriteLog += WritePhysicalLogAsync;
+            _lightBulb = new OnOffDevice("Agro Light Bulb", _shiftR, LIGHT_BULB_PIN);
+            _lightBulb.WriteLog += WritePhysicalLogAsync;
+            _lightController = new LightController("Light Controller", _lightFence, _lightBulb);
+            _lightController.WriteLog += WriteMasterLogAsync;
+
+            _lightController.OnLuce();
+            _lightController.PercentualeApertura(30);
+            /*
+            Task.Delay(5000);
+            _lightController.ApriCompletamente();
+            Task.Delay(5000);
+            _lightController.ChiudiCompletamente();
+            Task.Delay(5000);
+            _lightController.PercentualeApertura(80);
+            Task.Delay(5000);
+            _lightController.PercentualeApertura(0);
+            */
             txtStatus.Text = "Running...";
+        }
+
+        private async void WritePhysicalLogAsync(string s)
+        {
+            await _physicalFL.WriteLogAsync(s);
+        }
+
+        private async void WriteMasterLogAsync(string s)
+        {
+            await _masterFL.WriteLogAsync(s);
         }
 
         private void PrintStatus_Tick(object sender, object e)

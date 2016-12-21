@@ -96,11 +96,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Device.cs" />
+    <Compile Include="LightController.cs" />
+    <Compile Include="MasterDevice.cs" />
+    <Compile Include="PhysicalDevice.cs" />
+    <Compile Include="FileLogger.cs" />
     <Compile Include="LCD.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MCP3208ADC.cs" />
+    <Compile Include="OnOffDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SensoreAnalogico.cs" />
     <Compile Include="SensoreCO2.cs" />
@@ -109,6 +115,7 @@
     <Compile Include="SensoreUmiditaAria.cs" />
     <Compile Include="SensoreUmiditaTerreno.cs" />
     <Compile Include="ShiftRegister.cs" />
+    <Compile Include="StepperMotorDevice.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

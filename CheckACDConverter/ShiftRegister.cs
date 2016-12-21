@@ -85,5 +85,13 @@ namespace CheckACDConverter
             _latchPin.Write(HIGH);
             _latchPin.Write(LOW);
         }
+
+        public void WriteBit(int i, bool b)
+        {
+            bool tmp = bits[i];
+            bits[i] = b;
+            OutBits();
+            bits[i] = tmp;
+        }
     }
 }

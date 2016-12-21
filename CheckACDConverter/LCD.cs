@@ -150,10 +150,10 @@ namespace CheckACDConverter
             shift.OutBits();
         }
 
-        public void Print(string str)
+        public void Print(string s)
         {
-            for (int i = 0; i < str.Length; i++)
-                Putc((byte)str[i]);
+            for (int i = 0; i < s.Length; i++)
+                Putc((byte)s[i]);
         }
 
         public void Clear()

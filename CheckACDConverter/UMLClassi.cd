@@ -1,7 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CheckACDConverter.Device">
+    <Position X="14" Y="11" Width="5.5" />
+    <NestedTypes>
+      <Delegate Name="CheckACDConverter.Device.WriteLoggerEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Device.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAgAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Device.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckACDConverter.FileLogger">
+    <Position X="11.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAgABAAAAAAAAAAAAAAAAAAACAMAA=</HashCode>
+      <FileName>FileLogger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckACDConverter.LCD" BaseTypeListCollapsed="true">
+    <Position X="24" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ARAAACAACCAEAAACAAEBAICAAAAEAAAAAAEACABEAAQ=</HashCode>
+      <FileName>LCD.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="shift" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.1" Collapsed="true" />
+  </Class>
+  <Class Name="CheckACDConverter.LightController">
+    <Position X="12.75" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAABQAAAAAAAAEAAAACAAgAAACAAAAiAAAAAAATAA=</HashCode>
+      <FileName>LightController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_blindingFence" />
+      <Field Name="_lightBulb" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CheckACDConverter.MasterDevice">
+    <Position X="12.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MasterDevice.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_physicalDevices" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CheckACDConverter.MCP3208ADC">
+    <Position X="9.25" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAEIAAAAQAAAAQAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>MCP3208ADC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckACDConverter.OnOffDevice">
+    <Position X="16.75" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAIAAAAgIAAAAEAAAAAAAAABAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>OnOffDevice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckACDConverter.PhysicalDevice">
+    <Position X="17.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PhysicalDevice.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_reg" />
+    </ShowAsAssociation>
+  </Class>
   <Class Name="CheckACDConverter.SensoreAnalogico">
-    <Position X="16.25" Y="1.75" Width="1.5" />
+    <Position X="16.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAQAAAAAAQACAAA=</HashCode>
       <FileName>SensoreAnalogico.cs</FileName>
@@ -10,46 +87,53 @@
       <Field Name="_converter" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="CheckACDConverter.SensoreCO2">
-    <Position X="14" Y="4.75" Width="1.5" />
+  <Class Name="CheckACDConverter.SensoreCO2" Collapsed="true">
+    <Position X="14" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAQgAAACIIAAAAAQAAAAAAAAAAAA=</HashCode>
       <FileName>SensoreCO2.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CheckACDConverter.SensoreLuminosita">
-    <Position X="18.5" Y="4.75" Width="1.5" />
+  <Class Name="CheckACDConverter.SensoreLuminosita" Collapsed="true">
+    <Position X="18.5" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAQAAAAApAEAAAA=</HashCode>
       <FileName>SensoreLuminosita.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CheckACDConverter.SensoreTemperatura">
-    <Position X="11.75" Y="4.75" Width="1.5" />
+  <Class Name="CheckACDConverter.SensoreTemperatura" Collapsed="true">
+    <Position X="20.75" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAQApAEAAAA=</HashCode>
       <FileName>SensoreTemperatura.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CheckACDConverter.SensoreUmiditaAria">
-    <Position X="16.25" Y="4.75" Width="1.5" />
+  <Class Name="CheckACDConverter.SensoreUmiditaAria" Collapsed="true">
+    <Position X="11.75" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAApAEAAAA=</HashCode>
       <FileName>SensoreUmiditaAria.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CheckACDConverter.SensoreUmiditaTerreno">
-    <Position X="20.75" Y="4.75" Width="1.5" />
+  <Class Name="CheckACDConverter.SensoreUmiditaTerreno" Collapsed="true">
+    <Position X="16.25" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAgAAAAAI=</HashCode>
       <FileName>SensoreUmiditaTerreno.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CheckACDConverter.MCP3208ADC">
-    <Position X="12.5" Y="1" Width="1.5" />
+  <Class Name="CheckACDConverter.ShiftRegister">
+    <Position X="20.5" Y="13" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAIAAAEIAAAAQAAAAQAAAAAAAAAAACAAAAAAA=</HashCode>
-      <FileName>MCP3208ADC.cs</FileName>
+      <HashCode>AAAAgQAAAIgAAAEACAAAAAAACAAAIAggAAACAAAAEAA=</HashCode>
+      <FileName>ShiftRegister.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckACDConverter.StepperMotorDevice">
+    <Position X="19" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAQAAAAAAAAQAEEAQAAAIAAiAAAAAAAAAAIAAQAQ=</HashCode>
+      <FileName>StepperMotorDevice.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
