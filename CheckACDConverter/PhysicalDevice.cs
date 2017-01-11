@@ -11,6 +11,7 @@ namespace CheckACDConverter
         protected ShiftRegister _reg;
 
         public PhysicalDevice() : base() { _reg = null; }
+        public PhysicalDevice(string n) : base(n) { _reg = null; }
         public PhysicalDevice(string n, ShiftRegister rr) : base(n) { _reg = rr; }
     }
 }

@@ -108,6 +108,7 @@
     <Compile Include="MCP3208ADC.cs" />
     <Compile Include="OnOffDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PwmDevice.cs" />
     <Compile Include="SensoreAnalogico.cs" />
     <Compile Include="SensoreCO2.cs" />
     <Compile Include="SensoreLuminosita.cs" />

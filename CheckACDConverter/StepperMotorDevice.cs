@@ -16,6 +16,8 @@ namespace CheckACDConverter
         private GpioPin _endStopOr, _endStopAn;     // Porte collegate ai fine corsa
         private int _fase;                          // Numero di fase
 
+        private const GpioPinValue LOW = GpioPinValue.Low;
+
         public StepperMotorDevice() : base() { }
         public StepperMotorDevice(string n, ShiftRegister rr, 
             int bitA1,
@@ -45,10 +47,10 @@ namespace CheckACDConverter
 
         public bool StepOrario(int s)
         {
-            if (_endStopOr.Read() == GpioPinValue.Low) return (false);//Esce se arrivato a fine corsa
+            if (_endStopOr.Read() == LOW) return (false);//Esce se arrivato a fine corsa
             for (int i = 0; i < s; i++) //Effettua i passi richiesti
             {
-                if (_endStopOr.Read() == GpioPinValue.Low)
+                if (_endStopOr.Read() == LOW)
                 {
                     if (s != 1)
                         InvokeWriteLog("Gone clockwise for " + s + " steps and reached endline");
@@ -68,10 +70,10 @@ namespace CheckACDConverter
 
         public bool StepAntiOrario(int s)
         {
-            if (_endStopAn.Read() == GpioPinValue.Low) return (false);//Esce se arrivato a fine corsa
+            if (_endStopAn.Read() == LOW) return (false);//Esce se arrivato a fine corsa
             for (int i = 0; i < s; i++) //Effettua i passi richiesti
             {
-                if (_endStopAn.Read() == GpioPinValue.Low)
+                if (_endStopAn.Read() == LOW)
                 {
                     if (s != 1)
                         InvokeWriteLog("Gone anti-clockwise for " + s + " steps and reached endline");
@@ -161,7 +163,7 @@ namespace CheckACDConverter
         public int CalculateStepNumberAndGoToEnd()
         {
             PosizionaFineCorsaAntiOrario();
-            Task.Delay(20);
+            Task.Delay(20).Wait();
             int res = 0;
             while (StepOrario(1)) res++;
             InvokeWriteLog("I just calculated steps number and went to end");

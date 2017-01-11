@@ -48,6 +48,12 @@ namespace CheckACDConverter
         private const int LIGHT_BULB_PIN = 7;
         private LightController _lightController;
 
+        private PwmDevice _heatResistor;
+        private const int HEAT_RES_PIN = 12;
+
+        private PwmDevice _airCicleFan;
+        private const int AIR_CIRLE_FAN_PIN = 13;
+
         private SensoreAnalogico[] _sensori;
         private const int LUM_ARRAY_NUMBER = 0;
         private const int CO2_ARRAY_NUMBER = 1;
@@ -122,18 +128,12 @@ namespace CheckACDConverter
             _lightController = new LightController("Light Controller", _lightFence, _lightBulb);
             _lightController.WriteLog += WriteMasterLogAsync;
 
-            _lightController.OnLuce();
-            _lightController.PercentualeApertura(30);
-            /*
-            Task.Delay(5000);
-            _lightController.ApriCompletamente();
-            Task.Delay(5000);
-            _lightController.ChiudiCompletamente();
-            Task.Delay(5000);
-            _lightController.PercentualeApertura(80);
-            Task.Delay(5000);
-            _lightController.PercentualeApertura(0);
-            */
+            _heatResistor = new PwmDevice("Heat Resistor", HEAT_RES_PIN);
+            _heatResistor.WriteLog += WritePhysicalLogAsync;
+
+            _airCicleFan = new PwmDevice("Air Circle Fan", AIR_CIRLE_FAN_PIN);
+            _airCicleFan.WriteLog += WritePhysicalLogAsync;
+
             txtStatus.Text = "Running...";
         }
 
