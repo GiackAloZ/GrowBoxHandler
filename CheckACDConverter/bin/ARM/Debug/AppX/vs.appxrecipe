@@ -28,13 +28,13 @@
     <AppXManifest Include="C:\Users\giacomo.aloisi\Desktop\GrowBoxHandler\CheckACDConverter\bin\ARM\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-12-21T10:53:40.795</Modified>
+      <Modified>2017-01-14T09:38:11.792</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\giacomo.aloisi\Desktop\GrowBoxHandler\CheckACDConverter\bin\ARM\Debug\CheckACDConverter.exe">
       <PackagePath>entrypoint\CheckACDConverter.exe</PackagePath>
-      <Modified>2016-12-21T10:53:40.587</Modified>
+      <Modified>2017-01-14T09:38:11.396</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\giacomo.aloisi\.nuget\packages\Microsoft.CSharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -496,11 +496,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\giacomo.aloisi\Desktop\GrowBoxHandler\CheckACDConverter\bin\ARM\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-12-21T10:30:02.054</Modified>
+      <Modified>2017-01-14T09:23:50.659</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\giacomo.aloisi\Desktop\GrowBoxHandler\CheckACDConverter\bin\ARM\Debug\Core\CheckACDConverter.exe">
       <PackagePath>CheckACDConverter.exe</PackagePath>
-      <Modified>2016-12-21T10:53:40.793</Modified>
+      <Modified>2017-01-14T09:38:11.788</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

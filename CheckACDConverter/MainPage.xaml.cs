@@ -134,6 +134,14 @@ namespace CheckACDConverter
             _airCicleFan = new PwmDevice("Air Circle Fan", AIR_CIRLE_FAN_PIN);
             _airCicleFan.WriteLog += WritePhysicalLogAsync;
 
+            _airCicleFan.ChangeDutyCycle(50);
+            _airCicleFan.Start();
+            _heatResistor.ChangeDutyCycle(50);
+            _heatResistor.Start();
+            Task.Delay(1000).Wait();
+            _airCicleFan.Stop();
+            _heatResistor.Stop();
+
             txtStatus.Text = "Running...";
         }
 
