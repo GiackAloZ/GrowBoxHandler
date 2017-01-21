@@ -96,6 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ConnectionClient.cs" />
     <Compile Include="Device.cs" />
     <Compile Include="LightController.cs" />
     <Compile Include="MasterDevice.cs" />
