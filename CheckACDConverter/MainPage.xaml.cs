@@ -30,6 +30,10 @@ namespace CheckACDConverter
         private const string PHYSICAL_LOG_FILE_NAME = "physicalLog.txt";
         private const string MASTER_LOG_FILE_NAME = "masterLog.txt";
 
+		private ConnectionClient _client;
+		private const string SERVER_IP_ADDRESS = "10.38.0.15";
+		private const int SERVER_PORT = 1080;
+
         private const int SERIAL_NUMBER = 0;
         private const int LUM_SHIFT_NUMBER = 0;
         private const int CO2_SHIFT_NUMBER = 3;
@@ -136,13 +140,9 @@ namespace CheckACDConverter
             _airCicleFan = new PwmDevice("Air Circle Fan", AIR_CIRLE_FAN_PIN);
             _airCicleFan.WriteLog += WritePhysicalLogAsync;
 
-            _airCicleFan.ChangeDutyCycle(50);
-            _airCicleFan.Start();
-            _heatResistor.ChangeDutyCycle(50);
-            _heatResistor.Start();
-            Task.Delay(1000).Wait();
-            _airCicleFan.Stop();
-            _heatResistor.Stop();
+			_client = new ConnectionClient(SERVER_IP_ADDRESS, SERVER_PORT);
+			_client.Connect();
+			_client.SendString("This is a test<EOF>");
 
             txtStatus.Text = "Running...";
         }
