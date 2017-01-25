@@ -17,11 +17,13 @@ namespace CheckACDConverter
         private int _port;
         private Socket _socket;
 
+        public bool IsConnected { get; set; }
+
         public ConnectionClient(string ip, int port)
         {
-            byte[] IP = new byte[3];
+            byte[] IP = new byte[4];
 			string[] asd = ip.Split('.');
-			if(asd.Length == 3 && asd[0].Length <= 3 && asd[1].Length <= 3 && asd[2].Length <= 3)
+			if(asd.Length == 4)
 			{
 				for (int i = 0; i < asd.Length; i++)
 				{
@@ -33,6 +35,8 @@ namespace CheckACDConverter
 			{
 				throw new FormatException();
 			}
+
+            IsConnected = false;
 
 			_serverIp = new IPAddress(IP);
 			_port = port;
@@ -47,7 +51,11 @@ namespace CheckACDConverter
 
         public void Connect()
         {
-			_socket.Connect(_serverEndPoint);
+            if (!IsConnected)
+                _socket.Connect(_serverEndPoint);
+            else
+                throw new InvalidOperationException();
+            IsConnected = true;
         }
 
 		public void SendJson()
@@ -68,8 +76,12 @@ namespace CheckACDConverter
 
 		public void ShutdownAndClose()
 		{
-			_socket.Shutdown(SocketShutdown.Send);
-			_socket.Dispose();
-		}
+            if (IsConnected)
+            {
+			    _socket.Shutdown(SocketShutdown.Send);
+			    _socket.Dispose();
+            }
+            IsConnected = false;
+        }
     }
 }

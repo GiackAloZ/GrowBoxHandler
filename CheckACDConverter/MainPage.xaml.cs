@@ -139,12 +139,6 @@ namespace CheckACDConverter
 
             _airCicleFan = new PwmDevice("Air Circle Fan", AIR_CIRLE_FAN_PIN);
             _airCicleFan.WriteLog += WritePhysicalLogAsync;
-
-			_client = new ConnectionClient(SERVER_IP_ADDRESS, SERVER_PORT);
-			_client.Connect();
-			_client.SendString("This is a test<EOF>");
-
-            txtStatus.Text = "Running...";
         }
 
         private async void WritePhysicalLogAsync(string s)
@@ -169,6 +163,8 @@ namespace CheckACDConverter
             _currentStatus++;
         }
 
+
+        //Da eliminare
         private void btnLum_Click(object sender, RoutedEventArgs e)
         {
             txtLum.Text = _sensori[LUM_ARRAY_NUMBER].ReadValue().ToString() + " lux";
