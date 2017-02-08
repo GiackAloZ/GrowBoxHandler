@@ -8,10 +8,19 @@ using System.Net;
 using System.Net.Sockets;
 using Newtonsoft.Json;
 
+using System.Security.Cryptography;
+
 namespace CheckACDConverter
 {
     public class ConnectionClient
     {
+        private Random _a = new Random();
+        private RSACng _rsaAlg = new RSACng();
+        private RSAParameters _publicKey;
+        private byte[] _buffer;
+        private byte[] _clientHello = new byte[64];
+        private byte[] _serverHello = new byte[64];
+        private byte[] _preMasterSecret = new byte[64];
         private IPEndPoint _serverEndPoint;
 		private IPAddress _serverIp;
         private int _port;
@@ -58,6 +67,35 @@ namespace CheckACDConverter
             IsConnected = true;
         }
 
+        public void ConnectWithKeyExchange()
+        {
+            Connect();
+
+            //send client hello
+            _a.NextBytes(_clientHello);
+            SendByteArray(_clientHello);
+            //recieve server hello
+            int bytesR = Recieve();
+            _serverHello = _buffer;
+
+            //recieve public key
+            bytesR = Recieve();
+
+            _publicKey = _rsaAlg.ExportParameters(false);
+            _publicKey.Modulus = _buffer;
+            _rsaAlg.ImportParameters(_publicKey);
+
+            //calculate premaster secret
+            _a.NextBytes(_preMasterSecret);
+            _buffer = _rsaAlg.Encrypt(_preMasterSecret, RSAEncryptionPadding.OaepSHA512);
+
+            //send premaster secret
+            SendByteArray(_buffer);
+
+            //calcualate master secret
+            //TO DO
+        }
+
 		public void SendJson()
 		{
 			//TODO
@@ -82,6 +120,11 @@ namespace CheckACDConverter
 			    _socket.Dispose();
             }
             IsConnected = false;
+        }
+
+        private int Recieve()
+        {
+            return _socket.Receive(_buffer);
         }
     }
 }
